@@ -13,3 +13,6 @@
 [submodule "3rd/eansi-lua"]
 	path = 3rd/eansi-lua
 	url = https://github.com/smi11/eansi-lua
+[submodule "3rd/luasocket"]
+	path = 3rd/luasocket
+	url = https://github.com/diegonehab/luasocket.git
