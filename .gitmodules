@@ -10,3 +10,6 @@
 [submodule "3rd/libyaml"]
 	path = 3rd/libyaml
 	url = https://github.com/yaml/libyaml.git
+[submodule "3rd/eansi-lua"]
+	path = 3rd/eansi-lua
+	url = https://github.com/smi11/eansi-lua

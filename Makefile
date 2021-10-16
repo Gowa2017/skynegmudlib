@@ -13,7 +13,7 @@ LUA_INCS = -I$(LUA_DIR)
 
 
 
-libs: lfs lyaml
+libs: lfs lyaml ansi
 
 SRCS=$(LIB_SRC_DIR)/luafilesystem/src/lfs.c
 lfs:
@@ -26,6 +26,8 @@ lyaml:
 	install $(LIB_SRC_DIR)/lyaml/$(PLAT)/yaml.so $(LUACLIB)
 	install -d lib/lyaml
 	install $(LIB_SRC_DIR)/lyaml/lib/lyaml/* lib/lyaml
+ansi:
+	install $(LIB_SRC_DIR)/eansi-lua/eansi.lua  lib
 clean:
 	rm -rf $(LUACLIB)/*
 	rm -rf lib/lyaml
