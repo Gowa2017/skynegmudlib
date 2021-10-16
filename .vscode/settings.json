@@ -1,0 +1,12 @@
+{
+    "code-runner.executorMap": {
+        "lua": "lua -l luaenv",
+    },
+    "Lua.runtime.path": [
+        "?.lua",
+        "?/init.lua",
+        "core/?.lua",
+    ],
+    "Lua.workspace.ignoreSubmodules": false,
+    "editor.gotoLocation.multipleDefinitions": "goto",
+}
