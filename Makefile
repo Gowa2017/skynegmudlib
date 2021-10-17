@@ -22,6 +22,7 @@ endif
 libs: lfs lyaml ansi
 
 lfs:
+	install -d $(LUACLIB)
 	MACOSX_DEPLOYMENT_TARGET=$(MACOSX_DEPLOYMENT_TARGET)
 	export MACOSX_DEPLOYMENT_TARGET
 	$(CC) $(SHARED) $(LUA_INCS) -o $(LUACLIB)/lfs.so $(LIB_SRC_DIR)/luafilesystem/src/lfs.c
@@ -41,3 +42,4 @@ clean:
 	rm -rf $(LUACLIB)/yaml.so
 	rm -rf $(LUALIB)/lyaml
 	rm -rf $(LUALIB)/eansi.lua
+	rm -rf $(LUALIB)/pl
