@@ -8,5 +8,6 @@
         "core/?.lua",
     ],
     "Lua.workspace.ignoreSubmodules": false,
+    "Lua.workspace.useGitIgnore": false,
     "editor.gotoLocation.multipleDefinitions": "goto",
 }
