@@ -1,6 +1,7 @@
+local class = require("pl.class")
 ---@class ChannelManager : Class
 ---@field channels table<string,Channel>
-local M = class()
+local M     = class()
 function M:_init() self.channels = {} end
 
 function M:get(name) return self.channels[name] end

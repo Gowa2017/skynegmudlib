@@ -1,3 +1,4 @@
+local class  = require("pl.class")
 local Logger = require "core.Logger"
 ---@class Scriptable
 ---@field hasBehavior fun(name:string):boolean

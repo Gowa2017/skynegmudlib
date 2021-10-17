@@ -1,3 +1,4 @@
+local class       = require("pl.class")
 local CommandType = require("core.CommandType")
 local PlayerRoles = require("core.PlayerRoles")
 

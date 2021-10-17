@@ -1,3 +1,4 @@
+local class   = require("pl.class")
 local Account = require("core.Account")
 ---@class AccountManager : Class
 ---@field accounts table<string,Account> # username, Account pairs

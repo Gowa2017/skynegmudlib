@@ -1,3 +1,4 @@
+local class           = require("pl.class")
 local BehaviorManager = require("core.BehaviorManager")
 
 ---@class EntityFactory : Class

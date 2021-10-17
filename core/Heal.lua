@@ -1,3 +1,4 @@
+local class  = require("pl.class")
 local Damage = require("core.Damage")
 ---@class Heal :Damage
 local M      = class(Damage)

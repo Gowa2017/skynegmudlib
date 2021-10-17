@@ -1,3 +1,4 @@
+local class          = require("pl.class")
 local tconcat        = table.concat
 local sfmt           = string.format
 local fs             = require("pl.file");

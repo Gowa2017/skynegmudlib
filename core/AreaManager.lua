@@ -1,3 +1,4 @@
+local class           = require("pl.class")
 local BehaviorManager = require("core.BehaviorManager")
 local Area            = require("core.Area")
 local Room            = require("core.Room")

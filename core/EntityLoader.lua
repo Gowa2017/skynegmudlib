@@ -1,9 +1,10 @@
-local sfmt = string.format
+local class = require("pl.class")
+local sfmt  = string.format
 
 ---@class EntityLoader: Class
 ---@field dataSource DataSource
 ---@field config? table
-local M    = class()
+local M     = class()
 
 function M:_init(dataSource, config)
   self.dataSource = dataSource

@@ -1,3 +1,4 @@
+local class  = require("pl.class")
 local sfmt   = string.format
 local Quest  = require("core.Quest");
 local Logger = require("core.Logger");

@@ -1,3 +1,4 @@
+local class    = require("pl.class")
 local ItemType = require("core.ItemType")
 
 ---@class ItemManager : Class

@@ -1,3 +1,4 @@
+local class  = require("pl.class")
 ---@class HelpManager
 local M      = class()
 local tablex = require "pl.tablex"

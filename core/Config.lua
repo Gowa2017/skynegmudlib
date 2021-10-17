@@ -1,5 +1,6 @@
+local class  = require("pl.class")
 ---@class Config
-local M = class()
+local M      = class()
 
 local config = {}
 

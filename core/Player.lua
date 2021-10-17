@@ -1,3 +1,4 @@
+local class        = require("pl.class")
 local sfmt         = string.format
 local Character    = require("core.Character")
 local CommandQueue = require("core.CommandQueue")

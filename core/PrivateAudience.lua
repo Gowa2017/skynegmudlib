@@ -1,3 +1,4 @@
+local class           = require("pl.class")
 local stringx         = require("pl.stringx")
 
 local ChannelAudience = require("core.ChannelAudience");

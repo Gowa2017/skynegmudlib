@@ -1,3 +1,4 @@
+local class        = require("pl.class")
 local EventManager = require("core.EventManager")
 local Effect       = require("core.Effect")
 local tablex       = require("pl.tablex")

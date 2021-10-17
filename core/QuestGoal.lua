@@ -1,3 +1,4 @@
+local class        = require("pl.class")
 local EventEmitter = require("core.EventEmitter");
 local tablex       = require("pl.tablex")
 ---@class QuestGoal : EventEmitter

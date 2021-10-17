@@ -1,13 +1,14 @@
-local tconcat = table.concat
+local class    = require("pl.class")
+local tconcat  = table.concat
 
-local fs = require("pl.path")
-local file = require("pl.file")
-local pretty = require("pl.pretty")
+local fs       = require("pl.path")
+local file     = require("pl.file")
+local pretty   = require("pl.pretty")
 
 local dataPath
 
 ---@class Data
-local M = class()
+local M        = class()
 function M.setDataPath(path) dataPath = path end
 
 function M.parseFile(filepath)

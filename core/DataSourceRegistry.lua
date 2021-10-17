@@ -1,4 +1,5 @@
-local sfmt = string.format
+local class = require("pl.class")
+local sfmt  = string.format
 
 ---@class DataSource
 ---@field hasData fun(config?:table):boolean #Returns whether or not there is data for a given config.
@@ -10,7 +11,7 @@ local sfmt = string.format
 
 ---@class DataSourceRegistry : Class
 ---@field sources table<string, DataSource>
-local M    = class()
+local M     = class()
 
 function M:_init() self.sources = {} end
 

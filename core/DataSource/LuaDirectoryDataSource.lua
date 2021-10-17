@@ -1,3 +1,4 @@
+local class                  = require("pl.class")
 local path                   = require("pl.path")
 local dir                    = require("pl.dir")
 local sfmt                   = string.format

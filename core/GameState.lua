@@ -1,3 +1,4 @@
+local class                = require("pl.class")
 local AccountManager       = require("core.AccountManager")
 local BehaviorManager      = require("core.BehaviorManager")
 local AreaFactory          = require("core.AreaFactory")

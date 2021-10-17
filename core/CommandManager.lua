@@ -1,3 +1,4 @@
+local class  = require("pl.class")
 ---@class CommandManager : Class
 local M      = class()
 

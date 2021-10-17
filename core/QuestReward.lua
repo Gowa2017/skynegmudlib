@@ -1,5 +1,6 @@
+local class = require("pl.class")
 ---@class QuestReward : Class
-local M = class()
+local M     = class()
 function M.reward(GameState, quest, config, player)
   error("Quest reward not implemented")
 end

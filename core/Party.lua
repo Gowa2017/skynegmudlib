@@ -1,3 +1,4 @@
+local class  = require("pl.class")
 ---@class Party
 local M      = class()
 

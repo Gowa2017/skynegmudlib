@@ -1,3 +1,4 @@
+local class        = require("pl.class")
 local EventManager = require "core.EventManager"
 ---@class BehaviorManager : Class
 ---@field behaviors table<string,EventManager>

@@ -1,3 +1,4 @@
+local class       = require("pl.class")
 local SkillFlag   = require("core.SkillFlag")
 local SkillType   = require("core.SkillType")
 local SkillErrors = require("core.SkillErrors")

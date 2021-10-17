@@ -1,3 +1,4 @@
+local class  = require("pl.class")
 ---@class EventEmitter : Class
 ---@field events table<string, table<function,boolean>> # every event hava a listener table, every listener will tagged is once or not
 local M      = class()

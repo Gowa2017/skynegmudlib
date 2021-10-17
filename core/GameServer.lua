@@ -1,3 +1,4 @@
+local class        = require("pl.class")
 local EventEmitter = require("core.EventEmitter");
 ---@class GameServer : EventEmitter
 local M            = class(EventEmitter)

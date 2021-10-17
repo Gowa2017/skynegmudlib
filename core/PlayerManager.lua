@@ -1,3 +1,4 @@
+local class        = require("pl.class")
 local EventEmitter = require("core.EventEmitter")
 local Data         = require("core.Data")
 local Player       = require("core.Player")

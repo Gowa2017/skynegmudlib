@@ -1,3 +1,4 @@
+local class  = require("pl.class")
 local tablex = require("pl.tablex")
 
 ---@class EffectList : Class

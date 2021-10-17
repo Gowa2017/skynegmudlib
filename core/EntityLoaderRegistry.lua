@@ -1,3 +1,4 @@
+local class        = require("pl.class")
 local sfmt         = string.format
 local EntityLoader = require("core.EntityLoader");
 ---@class EntityLoaderRegistry : Class

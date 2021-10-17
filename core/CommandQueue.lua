@@ -1,5 +1,6 @@
+local class  = require("pl.class")
 ---@class CommandQueue : Class
-local M = class()
+local M      = class()
 local tablex = require("pl.tablex")
 function M:_init()
   self.commands = {}

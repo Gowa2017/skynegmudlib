@@ -1,5 +1,6 @@
+local class = require("pl.class")
 ---@class RoomManager : Class
-local M = class()
+local M     = class()
 
 function M:_init() self.rooms = {} end
 

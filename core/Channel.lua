@@ -1,3 +1,4 @@
+local class           = require("pl.class")
 local sfmt            = string.format
 local Broadcast       = require("core.Broadcast")
 local WorldAudience   = require("core.WorldAudience")

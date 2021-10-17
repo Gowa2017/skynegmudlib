@@ -1,3 +1,4 @@
+local class           = require("pl.class")
 local ChannelAudience = require("core.ChannelAudience")
 ---@class AreaAudience : ChannelAudience
 local M               = class(ChannelAudience)

@@ -1,6 +1,7 @@
-local sfmt = string.format
+local class = require("pl.class")
+local sfmt  = string.format
 ---@class AreaFloor : Class
-local M    = class()
+local M     = class()
 
 function M:_init(z)
   self.z = z

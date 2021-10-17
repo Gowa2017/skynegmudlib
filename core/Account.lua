@@ -1,4 +1,5 @@
-local Data = require("core.Data")
+local class = require("pl.class")
+local Data  = require("core.Data")
 
 ---@class Account : Class
 ---@field username string
@@ -7,7 +8,7 @@ local Data = require("core.Data")
 ---@field banned boolean
 ---@field deleted boolean
 ---@field metadata table<any,any>
-local M    = class()
+local M     = class()
 
 ---@param data table
 function M:_init(data)

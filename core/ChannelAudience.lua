@@ -1,5 +1,6 @@
+local class = require("pl.class")
 ---@class ChannelAudience :Class
-local M = class()
+local M     = class()
 
 function M:configure(options)
   self.state = options.state

@@ -1,3 +1,4 @@
+local class      = require("pl.class")
 local sfmt       = string.format
 local uuid       = require("core.lib.uuid")
 local tablex     = require("pl.tablex")

@@ -1,3 +1,4 @@
+local class = require("pl.class")
 ---当我们进行属性定义的时候，最少应该定义：name,label, base
 ---metadata 与 formula 为可选
 ---@class Attribute : Class
@@ -6,7 +7,7 @@
 ---@field delta number
 ---@field formula AttributeFormula | nil
 ---@field metadata table
-local M = class()
+local M     = class()
 ---@return Attribute
 function M:_init(name, base, delta, formula, metadata)
   self.name = name
@@ -29,7 +30,7 @@ function M:serialze() return { self.delta, self.base } end
 ---@class AttributeFormula : Class
 ---@field requires string[]
 ---@field formula fun(character:Character, currentVal:number,...)
-local F = class()
+local F     = class()
 
 ---@param requires string[]
 ---@param fn fun(...)

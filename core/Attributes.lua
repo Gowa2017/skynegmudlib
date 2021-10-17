@@ -1,7 +1,8 @@
+local class = require("pl.class")
 ---属性对象的容器
 ---@class Attributes :Class
 ---@field attributes table<string,Attribute>
-local M = class()
+local M     = class()
 
 function M:_init() self.attributes = {} end
 ---@param attribute Attribute

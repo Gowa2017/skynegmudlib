@@ -1,3 +1,4 @@
+local class         = require("pl.class")
 local Npc           = require("core.Npc")
 local EntityFactory = require("core.EntityFactory")
 

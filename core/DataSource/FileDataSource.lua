@@ -1,3 +1,4 @@
+local class          = require("pl.class")
 ---@class FileDataSource : Class
 local FileDataSource = class()
 

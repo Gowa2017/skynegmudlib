@@ -1,3 +1,4 @@
+local class      = require("pl.class")
 local sfmt       = string.format
 local tunpack    = table.unpack
 local tinsert    = table.insert

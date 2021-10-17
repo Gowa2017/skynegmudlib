@@ -1,11 +1,12 @@
-local sfmt = string.format
+local class = require("pl.class")
+local sfmt  = string.format
 ---@class Damage :Class
 ---@field attacker Character
 ---@field attribute string
 ---@field amount number
 ---@field source string
 ---@field metadata table
-local M    = class()
+local M     = class()
 
 ---@param attribute string
 ---@param amount number

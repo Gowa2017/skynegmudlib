@@ -1,3 +1,4 @@
+local class          = require("pl.class")
 local fs             = require("pl.file");
 local dir            = require("pl.dir")
 local path           = require("pl.path");

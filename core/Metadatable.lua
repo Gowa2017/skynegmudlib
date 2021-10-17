@@ -1,3 +1,4 @@
+local class = require("pl.class")
 local function getField(t, k)
   local v = t -- start with the table of globals
   for w in string.gmatch(k, "[%a_][%w_]*") do v = v[w] end

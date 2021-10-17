@@ -1,3 +1,4 @@
+local class            = require("pl.class")
 local Attribute        = require("core.Attribute").Attribute
 local AttributeFormula = require("core.Attribute").AttributeFormula
 local tablex           = require("pl.tablex")

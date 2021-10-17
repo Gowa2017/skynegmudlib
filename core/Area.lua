@@ -1,3 +1,4 @@
+local class      = require("pl.class")
 local tconcat    = table.concat
 local tinsert    = table.insert
 local tunpack    = table.unpack

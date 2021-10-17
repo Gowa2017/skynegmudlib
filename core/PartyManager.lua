@@ -1,3 +1,4 @@
+local class = require("pl.class")
 local Party = require("core.Party");
 
 ---@class PartyManager
