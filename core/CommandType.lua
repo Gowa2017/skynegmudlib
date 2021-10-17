@@ -1,0 +1,6 @@
+return {
+  COMMAND = "COMMAND",
+  SKILL = "SKILL",
+  CHANNEL = "CHANNEL",
+  MOVEMENT = "MOVEMENT",
+};
