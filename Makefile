@@ -7,7 +7,7 @@ SHARED := -fPIC -dynamiclib -Wl,-undefined,dynamic_lookup
 endif
 
 ROOT?=$(shell pwd)
-LUAINC ?=
+LUAINC?=
 
 LUACLIB ?= $(ROOT)/luaclib
 LUALIB ?= $(ROOT)/lualib
@@ -15,14 +15,11 @@ LIB_SRC_DIR= 3rd
 LUA_INCS = -I$(LUAINC)
 
 $(warning 可以传递 ROOT 变量，这样会将 core 的 clib lib 都安装在 ROOT 目录下)
+ifeq ($(LUAINC),)
+$(error 没有设置 LUAINC，变量，需要传输一个绝对路径来指名 LUA 代码位置。如 make LUAINC='/path/to/lua')
+endif
 
-
-libs: check lfs lyaml ansi
-
-check:
-	ifeq ($(LUAINC),)
-	$(error 没有设置 LUAINC，变量，需要传输一个绝对路径来指名 LUA 代码位置。如 make LUAINC='/path/to/lua')
-	endif
+libs: lfs lyaml ansi
 
 lfs:
 	MACOSX_DEPLOYMENT_TARGET=$(MACOSX_DEPLOYMENT_TARGET)
@@ -36,6 +33,9 @@ lyaml:
 ansi:
 	install $(LIB_SRC_DIR)/eansi-lua/eansi.lua $(LUALIB)
 	gsed -i 's/sub(3,-2)/sub(2,-2)/' $(LUALIB)/eansi.lua
+libs:
+	install -d $(LUALIB)/pl
+	install $(LIB_SRC_DIR)/Penlight/lua/pl/* $(LUALIB)/pl
 clean:
 	rm -rf $(LUACLIB)/lfs.so
 	rm -rf $(LUACLIB)/yaml.so
