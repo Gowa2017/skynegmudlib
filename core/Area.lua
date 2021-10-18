@@ -1,4 +1,5 @@
 local class      = require("pl.class")
+local Logger     = require("core.Logger")
 local tconcat    = table.concat
 local tinsert    = table.insert
 local tunpack    = table.unpack
@@ -76,11 +77,14 @@ function M:update(state)
   for npc, _ in pairs(self.npcs) do npc:emit("updateTick") end
 end
 
+---@param state GameState
 function M:hydrate(state)
+  Logger.verbose("\t\thydrate")
   self:setupBehaviors(state.AreaBehaviorManager)
-  local rooms = state.AreaFactory:getDefinition(self.name)
+  local rooms = state.AreaFactory:getDefinition(self.name).rooms
   for _, roomRef in ipairs(rooms) do
-    local room = state.RoomFactory.create(self, roomRef)
+    Logger.verbose("\t\tCreate Room:%s", roomRef)
+    local room = state.RoomFactory:create(self, roomRef)
     self:addRoom(room)
     state.RoomManager:addRoom(room)
     room:hydrate(state)
