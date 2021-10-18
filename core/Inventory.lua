@@ -8,7 +8,7 @@ local M      = class()
 function M:_init(init)
   init = tablex.update({
     items = {},
-    max   = nil, -- explicit set it ,need we set it
+    max   = math.maxinteger, -- explicit set it ,need we set it
   }, init)
   self.items = init.items
   self.maxSize = init.max
