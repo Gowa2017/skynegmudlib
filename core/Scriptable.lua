@@ -19,7 +19,7 @@ local function scriptable(base)
     for name, config in pairs(self.behaviors) do
       local behavior = manager:get(name)
       if not behavior then
-        Logger.warn("No script found for [....] behavior \"%q\"", name);
+        Logger.warn("No script found for [....] behavior %q", name);
         goto continue
       end
       config = config == true and {} or config
