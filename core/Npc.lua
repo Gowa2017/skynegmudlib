@@ -59,7 +59,7 @@ function M:hydrate(state)
   self:setupBehaviors(state.MobBehaviorManager)
 
   for _, defaultItemId in ipairs(self.defaultItems) do
-    Logger.info(sfmt("\tDIST: Adding item [%d] to npc [%s]", defaultItemId,
+    Logger.info(sfmt("\tDIST: Adding item [%q] to npc [%s]", defaultItemId,
                      self.name))
     local newItem = state.ItemFactory:create(self.area, defaultItemId)
     newItem:hydrate(state)
