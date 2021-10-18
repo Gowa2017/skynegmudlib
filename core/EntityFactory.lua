@@ -1,4 +1,5 @@
 local class           = require("pl.class")
+local sfmt            = string.format
 local BehaviorManager = require("core.BehaviorManager")
 
 ---@class EntityFactory : Class
@@ -40,7 +41,7 @@ end
 ---@return table @object of type Type
 function M:createByType(area, entityRef, Type)
   local def    = self:getDefinition(entityRef)
-  assert(def, "no def")
+  assert(def, sfmt("No Entity definition found for [%q]", entityRef))
   local entity = Type(area, def)
   if self.scripts[entityRef] then self.scripts[entityRef]:attach(entity) end
   return entity
