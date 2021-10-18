@@ -26,6 +26,7 @@ local AttributeFormula = require("core.Attribute").AttributeFormula
 local srcPath          = "./"
 
 ---@class BundleManager : Class
+---@field state GameState
 local M                = class()
 
 function M:_init(path, state)
@@ -60,8 +61,9 @@ function M:loadBundles(distribute)
   Logger.verbose("ENDLOAD: BUNDLES")
 
   if not distribute then return end
-
+  Logger.verbose("CREATE: AREA")
   for _, areaRef in ipairs(self.areas) do
+    Logger.verbose("\t%s", areaRef)
     local area = self.state.AreaFactory:create(areaRef)
     area:hydrate(self.state)
     self.state.AreaManager:addArea(area)
@@ -69,16 +71,14 @@ function M:loadBundles(distribute)
 end
 
 function M:loadBundle(bundle, bundlePath)
+  --- every bundle can have this features
   local features = {
     -- quest goals/rewards have to be loaded before areas that have quests which use those goals
     { path = "quest-goals/", fn   = "loadQuestGoals" },
     { path = "quest-rewards/", fn   = "loadQuestRewards" },
-
     { path = "attributes.lua", fn   = "loadAttributes" },
-
     -- any entity in an area, including the area itself, can have behaviors so load them first
     { path = "behaviors/", fn   = "loadBehaviors" },
-
     { path = "channels.lua", fn   = "loadChannels" },
     { path = "commands/", fn   = "loadCommands" },
     { path = "effects/", fn   = "loadEffects" },
@@ -109,7 +109,7 @@ function M:loadQuestGoals(bundle, goalsDir)
     if not Data.isScriptFile(goalPath, goalFile) then goto continue end
     ::continue::
     local goalName, ext = fs.splitext(goalFile)
-    local loader        = require(goalPath:gsub(ext, ""))
+    local loader        = loadfile(goalPath)()
     local goalImport    = QuestGoal:class_of(loader()) and loader or
                             loader(srcPath)
     Logger.verbose("\t\t%s", goalName)
@@ -130,7 +130,7 @@ function M:loadQuestRewards(bundle, rewardsDir)
     if not Data.isScriptFile(rewardPath, rewardFile) then goto continue end
 
     local rewardName, ext = fs.splitext(rewardFile)
-    local loader          = require(rewardPath:gsub(ext, ""))
+    local loader          = loadfile(rewardPath)()
     local rewardImport    = QuestReward:class_of(loader()) and loader or
                               loader(srcPath)
     Logger.verbose("\t\t%s", rewardName)
@@ -184,7 +184,7 @@ end
 function M:loadPlayerEvents(bundle, eventsFile)
   Logger.verbose("\tLOAD: Player Events...")
 
-  local loader          = require(eventsFile:gsub(".lua", ""))
+  local loader          = loadfile(eventsFile)()
   local playerListeners = self:_getLoader(loader, srcPath).listeners
 
   for eventName, listener in pairs(playerListeners) do
@@ -262,7 +262,7 @@ function M:loadArea(bundle, areaName, manifest)
         goto continue2
       end
       quest.npc = npcRef
-      self.state.QuestFactory.set(qid, quest)
+      self.state.QuestFactory:set(qid, quest)
       ::continue2::
     end
     ::continue::
@@ -298,14 +298,14 @@ function M:loadEntities(bundle, areaName, type, factory)
         self:loadEntityScript(factory, entityRef, entityScript)
       end
     end
-
+    res[#res + 1] = entityRef
   end
 
   return res
 end
 
 function M:loadEntityScript(factory, entityRef, scriptPath)
-  local loader          = require(scriptPath:gsub(".lua", ""))
+  local loader          = loadfile(scriptPath, "bt")()
   local scriptListeners = self:_getLoader(loader, srcPath).listeners
 
   for eventName, listener in pairs(scriptListeners) do
@@ -418,23 +418,23 @@ function M:loadBehaviors(bundle, behaviorsDir)
   Logger.verbose("\tLOAD: Behaviors...")
 
   local loadEntityBehaviors = function(type, manager, state)
-    local typeDir = behaviorsDir + type + "/"
+    local typeDir = behaviorsDir .. type .. "/"
 
     if not fs.exists(typeDir) then return end
 
     Logger.verbose("\t\tLOAD: BEHAVIORS [%s]...", type)
-    local files   = fs.getallfiles(typeDir)
+    local files   = dir.getallfiles(typeDir)
 
-    for _, behaviorFile in ipairs(files) do
-      local behaviorPath      = typeDir .. behaviorFile
+    for _, behaviorPath in ipairs(files) do
+      local _, behaviorFile   = fs.splitpath(behaviorPath)
+      -- local behaviorPath      = typeDir .. behaviorFile
       if not Data.isScriptFile(behaviorPath, behaviorFile) then
         goto continue
       end
 
-      local behaviorName      = fs.basename(behaviorFile,
-                                            fs.extension(behaviorFile))
+      local behaviorName      = fs.splitext(behaviorFile)
       Logger.verbose("\t\t\tLOAD: BEHAVIORS [%s] %s...", type, behaviorName)
-      local loader            = require(behaviorPath)
+      local loader            = loadfile(behaviorPath)()
       local behaviorListeners = self:_getLoader(loader, srcPath).listeners
 
       for eventName, listener in pairs(behaviorListeners) do
@@ -465,7 +465,7 @@ function M:loadEffects(bundle, effectsDir)
     local loader     = require(effectPath)
 
     Logger.verbose("\t\t%s", effectName)
-    self.state.EffectFactory.add(effectName, self:_getLoader(loader, srcPath),
+    self.state.EffectFactory:add(effectName, self:_getLoader(loader, srcPath),
                                  self.state)
     ::continue::
   end
