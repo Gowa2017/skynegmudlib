@@ -15,7 +15,7 @@ local function logFile(sSubType, sMsg, ...)
   local call = debug.getinfo(3, "S")
   local info = level < 2 and call.short_src .. ":" .. call.linedefined or ""
   if level > levels[sSubType] then return end
-  local s    = sfmt("%-8s: %s [%s] %s", sSubType, SERVICE_DESC, sfmt(sMsg, ...),
+  local s    = sfmt("%-8s:[%s] %s %s", sSubType, SERVICE_DESC, sfmt(sMsg, ...),
                     info)
   print(s)
 end
