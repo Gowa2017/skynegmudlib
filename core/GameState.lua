@@ -113,15 +113,17 @@ function M:_init(config, dirname)
   self.DataSourceRegistry = DataSourceRegistry()
   self.BundleManager = BundleManager(self.dirname .. "/bundles/", self);
 end
-
 function M:start()
   Logger.verbose("START - Starting server");
   self.GameServer:startup();
+end
+
+function M:updateTick()
   self.AreaManager:tickAll(self);
   self.ItemManager:tickAll();
   self.PlayerManager:emit("updateTick");
 end
-function M:load()
+function M:load(distribute)
   Logger.verbose("LOAD")
   self.DataSourceRegistry:load(require, self.dirname, Config.get("dataSources"))
   self.EntityLoaderRegistry:load(self.DataSourceRegistry,
@@ -129,7 +131,7 @@ function M:load()
   self.AccountManager:setLoader(self.EntityLoaderRegistry:get("accounts"));
   self.PlayerManager:setLoader(self.EntityLoaderRegistry:get("players"));
 
-  self.BundleManager:loadBundles();
+  self.BundleManager:loadBundles(distribute);
   self.ServerEventManager:attach(self.GameServer);
 end
 
