@@ -215,7 +215,7 @@ end
 
 function M:_setupInventory()
   self.inventory = self.inventory or Inventory()
-  if not self:isNpc() and type(self.inventory:getMax()) ~= "number" then
+  if not self:isNpc() and self.inventory:getMax() == math.maxinteger then
     self.inventory:setMax(Config.get("defaultMaxPlayerInventory") or 20)
   end
 end
