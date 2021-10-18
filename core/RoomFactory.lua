@@ -5,9 +5,9 @@ local EntityFactory = require("core.EntityFactory")
 ---@class RoomFactory : EntityFactory
 local M             = class(EntityFactory)
 function M:create(area, entityRef)
-  local npc = self:createByType(area, entityRef, Room)
-  npc.area = area
-  return npc
+  local room = self:createByType(area, entityRef, Room)
+  room.area = area
+  return room
 end
 
 return M
