@@ -255,11 +255,11 @@ function M:hydrate(state)
 
   for i, v in ipairs(self.defaultItems) do
     if type(v) == "string" then self.defaultItems[i] = { id = v } end
-    self:spawnItem(state, v)
+    self:spawnItem(state, self.defaultItems[i].id)
   end
   for i, v in ipairs(self.defaultNpcs) do
     if type(v) == "string" then self.defaultNpcs[i] = { id = v } end
-    self:spawnNpc(state, v)
+    self:spawnNpc(state, self.defaultNpcs[i].id)
   end
 end
 
