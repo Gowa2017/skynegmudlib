@@ -108,8 +108,10 @@ function M:removeItem(item)
 end
 
 function M:getExits()
-  local exits     = tablex.map(function(exit) exit.inferred = false end,
-                               self.exits)
+  local exits     = tablex.map(function(exit)
+    exit.inferred = false;
+    return exit
+  end, self.exits)
   if not self.area or not self.coordinates then return exits end
 
   local adjacents = {
