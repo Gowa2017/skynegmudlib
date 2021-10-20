@@ -338,13 +338,13 @@ function M:loadCommands(bundle, commandsDir)
   Logger.verbose("\tLOAD: Commands...")
   local files = dir.getallfiles(commandsDir)
 
-  for _, commandFile in ipairs(files) do
-    local commandPath = commandsDir .. commandFile
+  for _, commandPath in ipairs(files) do
+    local _, commandFile = fs.splitpath(commandPath)
     if not Data.isScriptFile(commandPath, commandFile) then goto continue end
-    local commandName = fs.basename(commandFile, fs.extension(commandFile))
-    local command     = self:createCommand(commandPath, commandName, bundle)
+    local commandName    = fs.splitext(commandFile)
+    Logger.verbose("\t\tCommand: %q", commandName)
+    local command        = self:createCommand(commandPath, commandName, bundle)
     self.state.CommandManager:add(command)
-
     ::continue::
   end
 
@@ -352,7 +352,7 @@ function M:loadCommands(bundle, commandsDir)
 end
 
 function M:createCommand(commandPath, commandName, bundle)
-  local loader    = require(commandPath)
+  local loader    = loadfile(commandPath)()
   local cmdImport = self:_getLoader(loader, srcPath, self.bundlesPath)
   cmdImport.command = cmdImport.command(self.state)
 
