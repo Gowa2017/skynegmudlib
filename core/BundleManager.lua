@@ -107,7 +107,6 @@ function M:loadQuestGoals(bundle, goalsDir)
   for _, goalPath in ipairs(files) do
     local _, goalFile   = fs.splitpath(goalPath)
     if not Data.isScriptFile(goalPath, goalFile) then goto continue end
-    ::continue::
     local goalName, ext = fs.splitext(goalFile)
     local loader        = loadfile(goalPath)()
     local goalImport    = QuestGoal:class_of(loader()) and loader or
@@ -117,6 +116,7 @@ function M:loadQuestGoals(bundle, goalsDir)
     self.state.QuestGoalManager:set(goalName, goalImport)
 
     Logger.verbose("\tENDLOAD: Quest Goals...")
+    ::continue::
   end
 end
 
@@ -392,16 +392,15 @@ end
 
 function M:loadInputEvents(bundle, inputEventsDir)
   Logger.verbose("\tLOAD: Events...")
-  local files = fs.getallfiles(inputEventsDir)
+  local files = dir.getallfiles(inputEventsDir)
 
-  for _, eventFile in ipairs(files) do
-    local eventPath   = inputEventsDir .. eventFile
+  for _, eventPath in ipairs(files) do
+    local _, eventFile = fs.splitpath(eventPath)
     if not Data.isScriptFile(eventPath, eventFile) then goto continue end
 
-    local eventName   = fs.basename(eventFile, fs.extension(eventFile))
-    local loader      = require(eventPath)
-    local eventImport = self:_getLoader(loader, srcPath)
-
+    local eventName    = fs.splitext(eventFile)
+    local loader       = loadfile(eventPath)()
+    local eventImport  = self:_getLoader(loader, srcPath)
     if type(eventImport.event) ~= "function" then
       error(sfmt(
               "Bundle %s has an invalid input event %s. Expected a function, got: %q",
@@ -501,14 +500,14 @@ end
 
 function M:loadServerEvents(bundle, serverEventsDir)
   Logger.verbose("\tLOAD: Server Events...")
-  local files = fs.getallfiles(serverEventsDir)
+  local files = dir.getallfiles(serverEventsDir)
 
-  for _, eventsFile in ipairs(files) do
-    local eventsPath      = serverEventsDir .. eventsFile
+  for _, eventsPath in ipairs(files) do
+    local _, eventsFile   = fs.splitpath(eventsPath)
     if not Data.isScriptFile(eventsPath, eventsFile) then goto continue end
-    local eventsName      = fs.basename(eventsFile, fs.extension(eventsFile))
+    local eventsName      = fs.splitext(eventsFile)
     Logger.verbose("\t\t\tLOAD: SERVER-EVENTS %s...", eventsName)
-    local loader          = require(eventsPath)
+    local loader          = loadfile(eventsPath)()
     local eventsListeners = self:_getLoader(loader, srcPath).listeners
 
     for eventName, listener in pairs(eventsListeners) do
