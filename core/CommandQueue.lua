@@ -31,13 +31,13 @@ function M:queue() return self.commands end
 
 function M:flush() self.commands = {} end
 
-function M:rest()
+function M:reset()
   self:flush()
   self.lastRun = 0
   self.lag = 0
 end
 
-function M:lastRemaining() return self.msTilNextRun() / 1000 end
+function M:lagRemaining() return self:msTilNextRun() / 1000 end
 
 function M:msTilNextRun()
   return math.max(0, (self.lastRun + self.lag) - os.time())
