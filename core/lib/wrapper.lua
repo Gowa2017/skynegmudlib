@@ -13,9 +13,16 @@ local function loadBundleScript(script, bundle)
   return loadScript(string.format("./bundles/%s/%s.lua", bundle, script))
 end
 
+---generate a table which represent a type of error
+---@param string string errormessage
+local function errortype(string)
+  return setmetatable({}, { __tostring = function() return string end })
+end
+
 return {
   bind             = bind,
   trim             = trim,
   loadScript       = loadScript,
   loadBundleScript = loadBundleScript,
+  errortype        = errortype,
 }
