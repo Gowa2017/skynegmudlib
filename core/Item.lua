@@ -184,10 +184,6 @@ function M:hydrate(state, serialized)
   self.__hydrated = true
 end
 
-function M:__tostring()
-  local pretty = require("pl.pretty")
-  return pretty.write(M:serialize())
-end
 function M:serialize()
   local behaviors = tablex.copy(self.behaviors)
   return {
