@@ -113,9 +113,11 @@ function M:_init(config, dirname)
   self.DataSourceRegistry = DataSourceRegistry()
   self.BundleManager = BundleManager(self.dirname .. "/bundles/", self);
 end
-function M:start()
+---now only need is { port = 8000}
+---@param config table
+function M:start(config)
   Logger.verbose("START - Starting server");
-  self.GameServer:startup();
+  self.GameServer:startup(config);
 end
 
 function M:updateTick()
