@@ -2,7 +2,7 @@ local class            = require("pl.class")
 local Attribute        = require("core.Attribute").Attribute
 local AttributeFormula = require("core.Attribute").AttributeFormula
 local tablex           = require("pl.tablex")
-local sfmt             = string.formt
+local sfmt             = string.format
 
 ---属性工厂，负责加载定义，创建属性对象
 ---@class AttributeFactory :Class
