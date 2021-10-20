@@ -43,7 +43,7 @@ end
 ---@param pass string
 function M:setPassword(pass)
   self.password = self:_hashPassword(pass)
-  self.save()
+  self:save()
 end
 
 -- TODO
