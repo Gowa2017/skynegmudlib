@@ -262,7 +262,7 @@ function M:hydrate(state)
   if not Attributes:class_of(self.attributes) then
     local attributes = self.attributes
     self.attributes = Attributes()
-    for attr, attrConfig in ipairs(attributes) do
+    for attr, attrConfig in pairs(attributes) do
       if type(attrConfig) == "number" then
         attrConfig = { base = attrConfig }
       end
@@ -276,7 +276,6 @@ function M:hydrate(state)
                                                       attrConfig.delta or 0))
     end
   end
-
   self.effects:hydrate(state)
 
   self.__hydrated = true
