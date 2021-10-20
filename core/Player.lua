@@ -56,7 +56,7 @@ end
 function M:interpolatePrompt(promptStr, extraData)
   extraData = extraData or {}
   local attributeData = {}
-  for attr, _ in pairs(self.attributes) do
+  for attr, _ in pairs(self.attributes.attributes) do
     attributeData[attr] = {
       current = self:getAttribute(attr),
       max     = self:getMaxAttribute(attr),
