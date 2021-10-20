@@ -25,7 +25,7 @@ function M:setBase(amount) self.base = math.max(amount, 0) end
 
 function M:setDelta(amount) self.delta = math.min(0, amount) end
 
-function M:serialze() return { self.delta, self.base } end
+function M:serialze() return { delta = self.delta, base  = self.base } end
 
 ---@class AttributeFormula : Class
 ---@field requires string[]
