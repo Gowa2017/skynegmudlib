@@ -5,8 +5,8 @@ local tablex = require("pl.tablex")
 local M      = class()
 function M:_init(player, active, completed)
   self.player = player
-  self.activeQuests = tablex.copy(active)
-  self.completedQuests = tablex.copy(completed)
+  self.activeQuests = tablex.copy(active or {})
+  self.completedQuests = tablex.copy(completed or {})
 end
 
 function M:emit(event, ...)
@@ -15,7 +15,7 @@ end
 
 function M:isActive(qid) return self.activeQuests[qid] end
 
-function M:icCompleted(qid) return self.completedQuests[qid] end
+function M:isCompleted(qid) return self.completedQuests[qid] end
 
 function M:get(qid) return self.activeQuests[qid] end
 
