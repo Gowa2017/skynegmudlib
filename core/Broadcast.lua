@@ -91,7 +91,7 @@ end
 ---
 function M.sayAt(source, message, wrapWidth, useColor, formatter)
   M.at(source, message, wrapWidth, useColor, function(target, message)
-    return (formatter and formatter(target, message) or message) -- .. "\r\n";
+    return (formatter and formatter(target, message) or message) .. "\r\n";
   end);
 end
 
@@ -213,7 +213,7 @@ function M.line(width, fillChar, color)
     openColor = "<${color}>";
     closeColor = "</${color}>";
   end
-  return openColor .. string.rep(fillChar, width + 1) .. closeColor;
+  return openColor .. string.rep(fillChar, width) .. closeColor;
 end
 
 ---
