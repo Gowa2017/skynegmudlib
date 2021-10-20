@@ -16,11 +16,14 @@ function M:set(qid, val) self.quests[qid] = val end
 
 function M:get(qid) return self.quests[qid] end
 
+---@param player Player
+---@param questRef string
+---@return boolean
 function M:canStart(player, questRef)
   local quest   = self.quests[questRef]
   if not quest then error(sfmt("Invalid quest id [%q]", questRef)) end
   local tracker = player.questTracker
-  if tracker.completedQuests:has(questRef) and not quest.config.repeatable then
+  if tracker.completedQuests[questRef] and not quest.config.repeatable then
     return false
   end
   if tracker:isActive(questRef) then return false end
