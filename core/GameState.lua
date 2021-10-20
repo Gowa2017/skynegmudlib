@@ -77,6 +77,7 @@ function M:_init(config, dirname)
   end
   Logger.verbose("INIT - GameState")
   Config.load(config)
+  Data.setDataPath(dirname .. "/data/")
   restartServer = restartServer or true
   self.dirname = dirname or "."
   self.AccountManager = AccountManager()
