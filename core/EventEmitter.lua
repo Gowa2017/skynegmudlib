@@ -30,8 +30,8 @@ function M:setMaxListeners(n) self.n = n end
 function M:listeners(event) return tablex.keys(self.events[event]) end
 
 function M:emit(event, ...)
-  tablex.foreach(tablex.keys(self.events[event] or {}),
-                 function(once, listener, ...)
+  local tmp = tablex.copy(self.events[event] or {})
+  tablex.foreach(tmp, function(once, listener, ...)
     local ok, err = xpcall(listener, debug.traceback, ...)
     if not ok then Logger.error(err) end
     if once then self.events[event][listener] = nil end
