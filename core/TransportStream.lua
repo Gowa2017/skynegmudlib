@@ -36,7 +36,7 @@ function M:destroy() end
 ---@param socket any
 function M:attach(socket)
   self.socket = socket;
-  self.socket:on("close", function() self:emit("close") end)
+  self.socket:on("close", function(sock) sock:emit("close") end)
 end
 
 return M
