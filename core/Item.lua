@@ -173,8 +173,8 @@ function M:hydrate(state, serialized)
     self.inventory:hydrate(state, self)
   else
     for _, defaultItemId in ipairs(self.defaultItems) do
-      Logger.verbose("\tDIST: Adding item [%s] to item [%s]", defaultItemId,
-                     self.name)
+      Logger.verbose("\tDIST: Adding item [%s] to item [%s] [%s]",
+                     defaultItemId, self.name, self.entityReference)
       local newItem = state.ItemFactory:create(self.area, defaultItemId)
       newItem:hydrate(state)
       state.ItemManager:add(newItem)
