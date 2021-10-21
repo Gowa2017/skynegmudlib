@@ -28,15 +28,18 @@ function M:_init(attribute, amount, attacker, source, metadata)
   self.metadata = metadata
 end
 
+---@param target Character
+---@return number
 function M:evaluate(target)
   local amount = self.amount
   if self.attacker then
-    amount = self.attacker:evaluateOutgoingDamage(amount, target)
+    amount = self.attacker:evaluateOutgoingDamage(self, amount)
   end
 
   return target:evaluateIncomingDamage(self, amount)
 end
 
+---@param target Character
 function M:commit(target)
   local finalAmount = self:evaluate(target)
   target:lowerAttribute(self.attribute, finalAmount)
