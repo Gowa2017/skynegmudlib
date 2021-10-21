@@ -116,10 +116,9 @@ end
 function M:evaluateOutgoingDamage(damage, currentAmount)
   self:validateEffects()
 
-  tablex.foreachi(self.effects, function(_, effect)
+  tablex.foreach(self.effects, function(_, effect)
     currentAmount = effect:modifyOutgoingDamage(damage, currentAmount)
   end)
-
   return math.max(currentAmount, 0) or 0
 end
 
