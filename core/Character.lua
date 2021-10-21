@@ -42,7 +42,7 @@ function M:_init(data)
 end
 
 function M:emit(event, ...)
-  Logger.debug("Character event: %s", event)
+  -- Logger.debug("Character event: %s", event)
   EventEmitter.emit(self, event, ...)
   self.effects:emit(event, ...)
 end
@@ -117,10 +117,10 @@ function M:initiateCombat(target, lag)
     self:emit("combatStart")
   end
 
-  if not self:isInCombat(target) then return end
+  if self:isInCombat(target) then return end
 
   self.combatants[target] = true
-  if not target:isInCombat() then target:initiateCombat(self, 2500) end
+  if not target:isInCombat() then target:initiateCombat(self, 2) end
 
   target:addCombatant(self)
 end
