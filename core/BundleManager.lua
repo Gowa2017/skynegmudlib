@@ -362,7 +362,7 @@ end
 function M:loadChannels(bundle, channelsFile)
   Logger.verbose("\tLOAD: Channels...")
 
-  local loader   = require(channelsFile)
+  local loader   = loadfile(channelsFile)()
   local channels = self:_getLoader(loader, srcPath)
 
   if type(channels) ~= "table" then channels = { channels } end
@@ -370,7 +370,6 @@ function M:loadChannels(bundle, channelsFile)
     channel.bundle = bundle
     self.state.ChannelManager:add(channel)
   end)
-
   Logger.verbose("\tENDLOAD: Channels...")
 end
 
@@ -382,10 +381,9 @@ function M:loadHelp(bundle)
   if not loader:hasData() then return end
 
   local records = loader:fetchAll()
-  for _, helpName in ipairs(records) do
-    local hfile = Helpfile(bundle, helpName, records[helpName])
+  for helpName, body in pairs(records) do
+    local hfile = Helpfile(bundle, helpName, body)
     self.state.HelpManager:add(hfile)
-
   end
   Logger.verbose("\tENDLOAD: Help...")
 end
