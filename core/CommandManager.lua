@@ -17,7 +17,7 @@ end
 function M:remove(command) self.commands[command.name] = nil end
 
 function M:find(search, returnAlias)
-  for name, command in ipairs(self.commands) do
+  for name, command in pairs(self.commands) do
     if name:find(search) == 1 then
       return returnAlias and { command = command, alias   = name } or command
     end
