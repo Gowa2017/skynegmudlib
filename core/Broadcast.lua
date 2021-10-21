@@ -31,7 +31,7 @@ function M.at(source, message, wrapWidth, useColor, formatter)
     local targetMessage = formatter(target, message)
     targetMessage = wrapWidth and M.wrap(targetMessage, wrapWidth) or
                       ansi(targetMessage)
-    Logger.info("Broadcast.at %s", targetMessage)
+    -- Logger.info("Broadcast.at %s", targetMessage)
     if not target.socket or not target.socket.writable then goto continue end
     if target.socket._prompted then
       target.socket:write("\r\n")
@@ -190,8 +190,8 @@ function M.center(width, message, color, fillChar)
   local openColor  = "";
   local closeColor = "";
   if color then
-    openColor = "<${color}>";
-    closeColor = "</${color}>";
+    openColor = "<" .. color .. ">";
+    closeColor = "" --  "</${color}>";
   end
 
   return (openColor .. M.line(math.floor(padWidth), fillChar) .. message ..
@@ -210,8 +210,8 @@ function M.line(width, fillChar, color)
   local openColor  = "";
   local closeColor = "";
   if color then
-    openColor = "<${color}>";
-    closeColor = "</${color}>";
+    openColor = "<" .. color .. ">";
+    closeColor = "" -- "</${color}>";
   end
   return openColor .. string.rep(fillChar, width) .. closeColor;
 end
