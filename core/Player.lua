@@ -48,7 +48,7 @@ end
 
 function M:emit(event, ...)
   if self.__pruned or not self.__hydrated then return end
-  Logger.debug("Player event %s", event)
+  -- Logger.debug("Player event %s", event)
   Character.emit(self, event, ...)
   self.questTracker:emit(event, ...)
 end
@@ -80,7 +80,10 @@ end
 
 function M:addPrompt(id, renderer, removeOnRender)
   removeOnRender = removeOnRender == nil and false or removeOnRender
-  self.extraPrompts[id] = { removeOnRender, renderer }
+  self.extraPrompts[id] = {
+    removeOnRender = removeOnRender,
+    renderer       = renderer,
+  }
 end
 
 function M:removePrompt(id) self.extraPrompts[id] = nil end
