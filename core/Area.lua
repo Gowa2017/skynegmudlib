@@ -79,11 +79,10 @@ end
 
 ---@param state GameState
 function M:hydrate(state)
-  Logger.verbose("\t\thydrate")
   self:setupBehaviors(state.AreaBehaviorManager)
   local rooms = state.AreaFactory:getDefinition(self.name).rooms
   for _, roomRef in ipairs(rooms) do
-    Logger.verbose("\t\tCreate Room:%s", roomRef)
+    Logger.verbose("\tCreate Room: [%s]", roomRef)
     local room = state.RoomFactory:create(self, roomRef)
     self:addRoom(room)
     state.RoomManager:addRoom(room)
