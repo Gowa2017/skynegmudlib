@@ -124,7 +124,7 @@ function TelnetSocket:attach(connection)
   connection:on("error", function(err) return self:emit("error", err) end);
   --- Handle telnet command and emit the data
   connection:on("data", function(databuf)
-    Logger.verbose("TelnetSocket.onData:%q", databuf)
+    Logger.debug("TelnetSocket.onData:%q", databuf)
     -- immediately start consuming data if we begin receiving normal data
     -- instead of telnet negotiation
     if connection.fresh and databuf:sub(1, 1) ~= Seq.IAC then
@@ -160,7 +160,7 @@ end
 ---@fires TelnetSocket#unknownAction
 ---
 function TelnetSocket:input(inputbuf)
-  Logger.verbose("Input:%q", inputbuf)
+  Logger.debug("Input:%q", inputbuf)
   if not inputbuf:find(Seq.IAC) then return self:emit("data", inputbuf) end
   -- strip any negotiations
   local cleanbuf     = {}
@@ -227,7 +227,7 @@ function TelnetSocket:input(inputbuf)
     ::continue::
   end
 
-  Logger.verbose("INPUT,RESULT:%q", tconcat(cleanbuf))
+  Logger.debug("INPUT,RESULT:%q", tconcat(cleanbuf))
   if not self.socket.fresh then
     self.socket.fresh = false;
     return;
@@ -262,7 +262,7 @@ function Socket:resume()
       socket.close(self.id)
       return
     end
-    Logger.verbose("Socket Data,%q", ret)
+    Logger.debug("Socket Data,%q", ret)
     self:emit("data", ret)
   end
 end
