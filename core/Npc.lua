@@ -10,7 +10,7 @@ local CommandQueue = require("core.CommandQueue")
 local tablex       = require("pl.tablex")
 
 ---@class Npc : Character, Scriptable
-local M            = Scriptable(class(Character))
+local M            = Scriptable(Character)
 function M:_init(area, data)
   self:super(data)
   local validate = { "keywords", "name", "id" }
