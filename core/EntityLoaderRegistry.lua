@@ -1,4 +1,5 @@
 local class        = require("pl.class")
+local Logger       = require("core.Logger")
 local sfmt         = string.format
 local EntityLoader = require("core.EntityLoader");
 ---@class EntityLoaderRegistry : Class
@@ -22,6 +23,8 @@ function M:load(sourceRegistry, config)
     end
 
     local sourceConfig = settings.config or {}
+    Logger.verbose("EntityLoader [%s] %s:%s", name, settings.source,
+                   sourceConfig.path)
     self.loaders[name] = EntityLoader(sourceRegistry:get(settings.source),
                                       sourceConfig)
   end
