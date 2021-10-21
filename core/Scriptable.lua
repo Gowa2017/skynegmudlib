@@ -10,7 +10,7 @@ local Logger = require "core.Logger"
 ---@return Class
 local function scriptable(base)
   local cls = class(base)
-  function cls:_int(...) self:super(...) end
+  function cls:_init(...) self:super(...) end
   function cls:hasBehavior(name) return self.behaviors[name] and true end
 
   function cls:getBehavior(name) return self.behaviors[name] end
