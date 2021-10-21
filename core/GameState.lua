@@ -71,7 +71,7 @@ local M                    = class()
 function M:_init(config, dirname)
   assert(config, "Need config module")
   if type(config) == "string" then
-    config = require(config)
+    config = loadfile(config)()
   else
     assert(type(config) == "table", "config must a string or a table")
   end
