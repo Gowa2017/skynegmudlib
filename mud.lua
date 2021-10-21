@@ -1,9 +1,18 @@
 return {
-  port                      = 4000,
+  port                      = 8000,
   bundles                   = {
     "bundle-example-areas",
     "bundle-example-quests",
     "bundle-example-lib",
+    "simple-crafting",
+    "bundle-example-npc-behaviors",
+    "bundle-example-combat",
+    "lootable-npcs",
+    "bundle-input-events",
+    "telnet-networking",
+    "bundle-example-commands",
+    "bundle-example-player-events",
+    "bundle-example-channels",
   },
   dataSources               = {
     Lua           = { require = "core.DataSource.LuaDataSource" },
@@ -37,7 +46,7 @@ return {
       config = { path = "bundles/[BUNDLE]/areas/[AREA]/quests.lua" },
     },
     help     = {
-      source = "LuaDirectory",
+      source = "YamlDirectory",
       config = { path = "bundles/[BUNDLE]/help" },
     },
   },
