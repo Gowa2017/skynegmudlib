@@ -131,7 +131,7 @@ function M.prompt(player, extra, wrapWidth, useColor)
   if needsNewline then M.sayAt(player) end
 
   for id, extraPrompt in pairs(player.extraPrompts) do
-    M.sayAt(player, extraPrompt:renderer(), wrapWidth, useColor)
+    M.sayAt(player, extraPrompt.renderer(), wrapWidth, useColor)
     if extraPrompt.removeOnRender then player:removePrompt(id) end
 
   end
@@ -164,16 +164,16 @@ function M.progress(width, percent, color, barChar, fillChar, delimiters)
   barChar = barChar:sub(1, 1)
   fillChar = fillChar:sub(1, 1)
   local leftDelim, rightDelim = delimiters:sub(1, 1), delimiters:sub(2, 2);
-  local openColor             = "<${color}>";
-  local closeColor            = "</${color}>";
+  local openColor             = "<" .. color .. ">";
+  local closeColor            = "" -- "</${color}>";
   local buf                   = openColor .. leftDelim .. "<bold>";
   local widthPercent          = math.floor((percent / 100) * width);
   local res                   = { buf }
   res[#res + 1] = M.line(widthPercent, barChar) ..
                     (percent == 100 and "" or rightDelim);
   res[#res + 1] = M.line(width - widthPercent, fillChar);
-  res[#res + 1] = "</bold>" .. rightDelim .. closeColor;
-  return table.concat(buf, "");
+  res[#res + 1] = rightDelim .. closeColor;
+  return table.concat(res, "");
 end
 
 ---
