@@ -1,6 +1,7 @@
 local class        = require("pl.class")
 local EventEmitter = require("core.EventEmitter")
 local tablex       = require("pl.tablex")
+local wrapper      = require("core.lib.wrapper")
 
 ---@class Effect : EventEmitter
 ---@field id string
@@ -33,8 +34,11 @@ function M:_init(id, def)
   self.paused = 0
   self.modifiers = tablex.update({
     attributes     = {},
-    incomingDamage = function(damage, current) return current end,
-    outgoingDamage = function(damage, current) return current end,
+    incomingDamage = function(effect, damage, current) return current end,
+    outgoingDamage = function(effect, damage, current)
+      print(effect, damage, current)
+      return current
+    end,
   }, def.modifiers)
   self.state = tablex.update({}, def.state)
   self.state.stacks = self.config.maxStacks and 1
@@ -92,25 +96,26 @@ function M:modifyAttribute(attrName, currentValue)
   --- modifier need to get the state of effect
   if type(self.modifiers.attributes) == "function" then
     modifier = function(current)
-      return self.modifiers.attributes(self, attrName, current)
+      return wrapper.bind(self.modifiers.attributes, self)(self, attrName,
+                                                           current)
     end
 
   else
     if self.modifiers.attributes[attrName] then
       modifier = self.modifiers.attributes[attrName]
     end
-    return modifier(self, currentValue)
+    return wrapper.bind(modifier, self)(currentValue)
   end
 end
 
 function M:modifyIncomingDamage(damage, currentAmount)
-  local modifier = self.modifiers.incomingDamage
-  return modifier(self, damage, currentAmount)
+  local modifier = wrapper.bind(self.modifiers.incomingDamage, self)
+  return modifier(damage, currentAmount)
 end
 
 function M:modifyOutgoingDamage(damage, currentAmount)
-  local modifier = self.modifiers.outgoingDamage
-  return modifier(self, damage, currentAmount)
+  local modifier = wrapper.bind(self.modifiers.outgoingDamage, self)
+  return modifier(damage, currentAmount)
 end
 
 function M:serialize()
