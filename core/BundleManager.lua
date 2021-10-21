@@ -320,7 +320,7 @@ function M:loadQuests(bundle, areaName)
   loader:setArea(areaName)
   local ok, quests = pcall(loader.fetchAll, loader)
   if not ok then
-    Logger.error(quests)
+    Logger.warn(quests)
     quests = {}
   end
   local res        = {}
