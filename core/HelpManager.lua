@@ -4,7 +4,7 @@ local M      = class()
 local tablex = require "pl.tablex"
 function M:_init() self.helps = {} end
 
-function M:get(help) return self.helps[help.name] end
+function M:get(help) return self.helps[help] end
 
 function M:add(help) self.helps[help.name] = help end
 
@@ -24,7 +24,6 @@ function M:find(search)
     end
     ::continue::
   end
-
   return results
 end
 
