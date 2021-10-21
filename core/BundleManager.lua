@@ -61,9 +61,9 @@ function M:loadBundles(distribute)
   Logger.verbose("ENDLOAD: BUNDLES")
 
   if not distribute then return end
-  Logger.verbose("CREATE: AREA")
+  Logger.verbose("DIST: ...............")
   for _, areaRef in ipairs(self.areas) do
-    Logger.verbose("\t%s", areaRef)
+    Logger.verbose("-------------------DIST AREA:%s-------------------", areaRef)
     local area = self.state.AreaFactory:create(areaRef)
     area:hydrate(self.state)
     self.state.AreaManager:addArea(area)
