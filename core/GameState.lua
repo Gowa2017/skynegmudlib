@@ -76,6 +76,7 @@ function M:_init(config, dirname)
     assert(type(config) == "table", "config must a string or a table")
   end
   Logger.verbose("INIT - GameState")
+  dirname = dirname or "."
   Config.load(config)
   Data.setDataPath(dirname .. "/data/")
   restartServer = restartServer or true
