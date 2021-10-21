@@ -16,7 +16,7 @@ local tablex          = require("pl.tablex")
 ---@field color string
 ---@field aliases string[]
 ---@field formater table<string, function> # sender, target
-local M               = class("Channel")
+local M               = class()
 
 function M:_init(config)
   assert(config.name, "Channels must have a name to be usable.")
