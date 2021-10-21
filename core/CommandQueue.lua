@@ -23,7 +23,7 @@ function M:execute()
   local command = table.remove(self.commands, 1)
   self.lastRun = os.time()
   self.lag = command.lag
-  command.execute()
+  command:execute()
   return true
 end
 
