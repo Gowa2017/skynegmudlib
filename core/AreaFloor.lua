@@ -22,7 +22,7 @@ function M:addRoom(x, y, room)
   self.map[x][y] = room
 end
 
-function M:getRoom(x, y) return self.map[x][y] end
+function M:getRoom(x, y) return self.map[x] and self.map[x][y] end
 
 function M:removeRoom(x, y)
   if not (self.map[x] or self.map[x][y]) then
