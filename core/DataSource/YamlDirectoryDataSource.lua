@@ -19,7 +19,7 @@ end
 function M:fetchAll(config)
   config = config or {}
   local dirPath = self:resolvePath(config)
-  if not self:hasData(dirPath) then
+  if not self:hasData(config) then
     error(sfmt("Invalid path [%q] sepecified for YamlDirectoryDataSource",
                dirPath))
   end
@@ -27,7 +27,8 @@ function M:fetchAll(config)
   local files   = dir.getfiles(dirPath)
   for _, f in pairs(files) do
     if path.extension(f) ~= ".yml" then goto continue end
-    local id = path.basename(f)
+    local _, file = path.splitpath(f)
+    local id      = path.splitext(file)
     data[id] = self:fetch(config, id)
     ::continue::
   end
