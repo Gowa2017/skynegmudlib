@@ -224,8 +224,8 @@ function M:lockDoor(fromRoom)
 end
 
 function M:spawnItem(state, entityRef)
-  Logger.info(sfmt("\tSPAWN: Adding item [%s] to room [%s]", entityRef,
-                   self.title))
+  Logger.info(sfmt("\tSPAWN: Adding item [%s] to room [%s][%s]", entityRef,
+                   self.title, self.entityReference))
   local newItem = state.ItemFactory:create(self.area, entityRef)
   newItem:hydrate(state)
   newItem.sourceRoom = self
@@ -236,8 +236,8 @@ function M:spawnItem(state, entityRef)
 end
 
 function M:spawnNpc(state, entityRef)
-  Logger.info(sfmt("\tSPAWN: Adding npc [%s] to room [%s]", entityRef,
-                   self.title))
+  Logger.info(sfmt("\tSPAWN: Adding npc [%s] to room [%s] [%s]", entityRef,
+                   self.title, self.entityReference))
   local newNpc = state.MobFactory:create(self.area, entityRef)
   newNpc:hydrate(state)
   newNpc.sourceRoom = self
