@@ -2,7 +2,7 @@ local sfmt         = string.format
 local M            = {}
 local level        = 0
 local levels       = {
-  VERBOSE  = 0,
+  NOSET    = 0,
   DEBUG    = 1,
   INFO     = 2,
   WARNING  = 3,
@@ -35,7 +35,7 @@ M.warn = M.warning
 
 function M.debug(sMsg, ...) logFile("DEBUG", sMsg, ...) end
 
-function M.verbose(sMsg, ...) logFile("VERBOSE", sMsg, ...) end
+function M.verbose(sMsg, ...) logFile("INFO", sMsg, ...) end
 
 function M.setLevel(l) level = l end
 
