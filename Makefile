@@ -1,5 +1,5 @@
 OS=$(shell uname -s)
-PLAT =
+PLAT = linux
 SHARED := -fPIC --shared
 ifeq ($(OS), Darwin)
 PLAT = macosx
