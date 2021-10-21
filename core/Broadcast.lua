@@ -32,15 +32,22 @@ function M.at(source, message, wrapWidth, useColor, formatter)
     targetMessage = wrapWidth and M.wrap(targetMessage, wrapWidth) or
                       ansi(targetMessage)
     -- Logger.info("Broadcast.at %s", targetMessage)
-    if not target.socket or not target.socket.writable then goto continue end
-    if target.socket._prompted then
-      target.socket:write("\r\n")
-      target.socket._prompted = false
+    local isPrint       = false
+    if not target.socket or not target.socket.writable then -- goto continue
+      isPrint = true
     end
     local targetMessage = formatter(target, message)
     targetMessage = wrapWidth and M.wrap(targetMessage, wrapWidth) or
                       ansi(targetMessage)
-    target.socket:write(targetMessage);
+    if isPrint then
+      print(targetMessage)
+    else
+      if target.socket._prompted then
+        target.socket:write("\r\n")
+        target.socket._prompted = false
+      end
+      target.socket:write(targetMessage);
+    end
     ::continue::
   end
 
