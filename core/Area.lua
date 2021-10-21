@@ -57,7 +57,7 @@ end
 
 function M:addRoomToMap(room)
   assert(room.coordinates, "Room does not have coordinates")
-  local x, y, z = tunpack(room.coordinates)
+  local x, y, z = room.coordinates.x, room.coordinates.y, room.coordinates.z
   if not self.map[z] then self.map[z] = AreaFloor(z) end
   local floor   = self.map[z]
   floor:addRoom(x, y, room)
