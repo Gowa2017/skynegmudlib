@@ -126,8 +126,7 @@ function M:initiateCombat(target, lag)
 end
 
 function M:isInCombat(target)
-  return
-    target and self.combatants.has(target) or tablex.size(self.combatants) > 0
+  return target and self.combatants[target] or tablex.size(self.combatants) > 0
 end
 
 function M:addCombatant(target)
