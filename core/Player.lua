@@ -64,9 +64,17 @@ function M:interpolatePrompt(promptStr, extraData)
     }
   end
   local promptData    = tablex.update(attributeData, extraData)
+  for stat, index in promptStr:gmatch("%%([%a]+)%.([%a]+)%%") do
+    local rep = "%%" .. stat .. "." .. index .. "%%"
+    if promptData[stat] and promptData[stat][index] then
+      promptStr = promptStr:gsub(rep, tostring(promptData[stat][index]))
+    else
+      promptStr = promptStr:gsub(rep, "")
+    end
+  end
 
-  -- let matches = null
-  -- while (matches = promptStr.match(/%([a-z\.]+)%/)) {
+  -- local matches
+  -- while (matches = promptStr:match('%%([%az\.]+)%%/)) {
   --   local token = matches[1]
   --   let promptValue = token.split('.').reduce((obj, index) => obj && obj[index], promptData)
   --   if (promptValue === null || promptValue === undefined) {
