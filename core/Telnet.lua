@@ -227,8 +227,10 @@ function TelnetSocket:input(inputbuf)
     ::continue::
   end
 
-  Logger.debug("INPUT,RESULT:%q", tconcat(cleanbuf))
-  if not self.socket.fresh then
+  local data         = tconcat(cleanbuf)
+  Logger.debug("INPUT,RESULT:%q", data)
+  if #data < 1 then return end
+  if self.socket.fresh then
     self.socket.fresh = false;
     return;
   end
@@ -241,7 +243,7 @@ Telnet.TelnetSocket = TelnetSocket;
 ---And will read from skynet socket id in loop, then emit data.
 ---@class Socket : EventEmitter
 ---@field id number @skynet socket index
----@field fresh boolean @is new ?
+---@field fresh boolean @is new connect?
 ---@field addr string @client address
 local Socket       = class(EventEmitter)
 
