@@ -472,7 +472,7 @@ end
 
 function M:loadSkills(bundle, skillsDir)
   Logger.verbose("\tLOAD: Skills...")
-  local files = dir.getallfiles(skillsDir)
+  local files = dir.getfiles(skillsDir)
 
   for _, skillPath in ipairs(files) do
     local _, skillFile = fs.splitpath(skillPath)
