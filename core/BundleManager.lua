@@ -452,14 +452,14 @@ end
 
 function M:loadEffects(bundle, effectsDir)
   Logger.verbose("\tLOAD: Effects...")
-  local files = fs.getallfiles(effectsDir)
+  local files = dir.getallfiles(effectsDir)
 
-  for _, effectFile in ipairs(files) do
-    local effectPath = effectsDir .. effectFile
+  for _, effectPath in ipairs(files) do
+    local _, effectFile = fs.splitpath(effectPath)
     if not Data.isScriptFile(effectPath, effectFile) then goto continue end
 
-    local effectName = fs.basename(effectFile, fs.extension(effectFile))
-    local loader     = require(effectPath)
+    local effectName    = fs.splitext(effectFile)
+    local loader        = loadfile(effectPath)()
 
     Logger.verbose("\t\t%s", effectName)
     self.state.EffectFactory:add(effectName, self:_getLoader(loader, srcPath),
@@ -472,18 +472,18 @@ end
 
 function M:loadSkills(bundle, skillsDir)
   Logger.verbose("\tLOAD: Skills...")
-  local files = fs.getallfiles(skillsDir)
+  local files = dir.getallfiles(skillsDir)
 
-  for _, skillFile in ipairs(files) do
-    local skillPath   = skillsDir .. skillFile
+  for _, skillPath in ipairs(files) do
+    local _, skillFile = fs.splitpath(skillPath)
     if not Data.isScriptFile(skillPath, skillFile) then goto continue end
-    local skillName   = fs.basename(skillFile, fs.extension(skillFile))
-    local loader      = require(skillPath)
-    local skillImport = self:_getLoader(loader, srcPath)
+    local skillName    = fs.splitext(skillFile)
+    local loader       = loadfile(skillPath)()
+    local skillImport  = self:_getLoader(loader, srcPath)
     if skillImport.run then skillImport.run = skillImport.run(self.state) end
 
     Logger.verbose("\t\t%s", skillName)
-    local skill       = Skill(skillName, skillImport, self.state)
+    local skill        = Skill(skillName, skillImport, self.state)
 
     if skill.type == SkillType.SKILL then
       self.state.SkillManager:add(skill)
