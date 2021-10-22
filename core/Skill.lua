@@ -43,12 +43,12 @@ function M:_init(id, config, state)
   self.id = id
   self.info = wrapper.bind(c.info, self)
   self.initiatesCombat = c.initiatesCombat
-  self.name = name
+  self.name = c.name
   self.options = c.options
   self.requiresTarget = c.requiresTarget
   self.resource = c.resource
   self.run = wrapper.bind(c.run, self)
-  self.state = state
+  self.state = c.state
   self.targetSelf = c.targetSelf
   self.type = c.type
 end
