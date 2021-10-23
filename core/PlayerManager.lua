@@ -25,10 +25,10 @@ function M:getPlayer(name) return self.players[name:lower()] end
 function M:addPlayer(player) self.players[self:keyify(player)] = player end
 
 function M:removePlayer(player, killSocket)
-  if killSocket then player.socket:ended() end
+  if killSocket then player.socket:stop() end
   player:removeAllListeners()
   player:removeFromCombat()
-  player.effectys:clear()
+  player.effects:clear()
   if player.room then player.room:removePlayer(player) end
 
   player.__pruned = true
